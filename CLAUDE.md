@@ -45,7 +45,7 @@ machine. Deux choses distinctes :
   publie une nouvelle version de son contrat. Ne jamais lire le contrat
   dans un autre repo (`../shop-api/…`).
 - **Le serveur qui tourne** : son adresse vient de la variable
-  `SHOP_API_URL` (`.env`, jamais commité ; valeur d'exemple dans
+  `BACKEND_API_URL` (`.env`, jamais commité ; valeur d'exemple dans
   `.env.example`), lue uniquement dans `src/shared/config`. En local :
   shop-api lancé sur le poste, ou un environnement partagé. Les tests
   n'appellent jamais un vrai serveur.
