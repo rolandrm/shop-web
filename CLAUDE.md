@@ -23,15 +23,42 @@ ce fichier ne contient que les ajouts propres au projet.
 
 ## Stack
 
-| Application | Framework | Langage | Root |
-| ----------- | --------- | ------- | ---- |
-| <app>       | <...>     | <...>   | `.`  |
+| Application | Framework               | Langage    | Root |
+| ----------- | ----------------------- | ---------- | ---- |
+| shop-web    | Next.js 16 (App Router) | TypeScript | `.`  |
+
+Rôle : frontend + BFF, sans base de données. Le navigateur ne parle jamais
+au backend : seul le serveur Next.js l'appelle (Server Components, Server
+Actions, Route Handlers).
+
+## Backend consommé : shop-api
+
+shop-api vit dans son propre repo ; il n'a pas à être présent sur la
+machine. Deux choses distinctes :
+
+- **Le contrat** (ce que l'API accepte et renvoie) : copie versionnée dans
+  ce repo, `docs/api/backends/shop-api.openapi.json`, avec sa provenance
+  (repo, tag ou commit) dans `docs/api/backends/README.md`. C'est la
+  référence pour écrire les schémas Zod (à la main, champs utilisés
+  seulement) et pour le backend simulé (MSW en tests, Prism en E2E). Elle
+  ne se met à jour que par un geste humain, relu en PR, quand shop-api
+  publie une nouvelle version de son contrat. Ne jamais lire le contrat
+  dans un autre repo (`../shop-api/…`).
+- **Le serveur qui tourne** : son adresse vient de la variable
+  `SHOP_API_URL` (`.env`, jamais commité ; valeur d'exemple dans
+  `.env.example`), lue uniquement dans `src/shared/config`. En local :
+  shop-api lancé sur le poste, ou un environnement partagé. Les tests
+  n'appellent jamais un vrai serveur.
 
 ## Commandes canoniques
 
-- build : `<commande>`
-- lint : `<commande>`
-- test : `<commande>`
+- build : `pnpm build`
+- typecheck : `pnpm typecheck`
+- lint : `pnpm lint` (ESLint, dont les règles d'architecture), puis
+  `pnpm lint:architecture` (dependency-cruiser, parité des traductions)
+- test : à venir (socle `web-foundation`)
+
+Toutes sont lancées par `harness verify`.
 
 ## Carte du système
 
