@@ -56,7 +56,7 @@ machine. Deux choses distinctes :
 - typecheck : `pnpm typecheck`
 - lint : `pnpm lint` (ESLint, dont les règles d'architecture), puis
   `pnpm lint:architecture` (dependency-cruiser, parité des traductions)
-- test : à venir (socle `web-foundation`)
+- test : `pnpm test`
 
 Toutes sont lancées par `harness verify`.
 

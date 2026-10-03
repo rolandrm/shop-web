@@ -1,0 +1,13 @@
+{
+  "common": {
+    "appName": "Shop",
+    "homeTitle": "Bienvenue sur la boutique",
+    "homeIntro": "La fondation technique de la boutique est en place.",
+    "loading": "Chargement en cours"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue. Veuillez réessayer.",
+    "retry": "Réessayer",
+    "notFound": "Cette page est introuvable."
+  }
+}

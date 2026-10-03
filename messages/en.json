@@ -1,0 +1,13 @@
+{
+  "common": {
+    "appName": "Shop",
+    "homeTitle": "Welcome to the shop",
+    "homeIntro": "The technical foundation of the shop is in place.",
+    "loading": "Loading"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "retry": "Try again",
+    "notFound": "This page could not be found."
+  }
+}

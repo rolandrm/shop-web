@@ -10,19 +10,16 @@
           "build": "pnpm build",
           "lint": "pnpm lint",
           "typecheck": "pnpm typecheck",
-          "lint:architecture": "pnpm lint:architecture"
+          "lint:architecture": "pnpm lint:architecture",
+          "test": "pnpm test"
         }
       }
     ]
   },
   "global": {},
   "paths": {
-    "docs": [
-      "docs/"
-    ],
+    "docs": ["docs/"],
     "generated": [],
-    "protected": [
-      "docs/decisions/"
-    ]
+    "protected": ["docs/decisions/"]
   }
 }

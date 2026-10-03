@@ -1,6 +1,6 @@
 # Spec : web-foundation
 
-- **Statut** : Draft
+- **Statut** : Implemented
 - **Auteur** : Harness (socle standard Next.js), à relire par l'équipe
 - **Version** : 0.1.0
 - **Liée à** : règles `.claude/rules/nextjs/` (shared, general, security, i18n, app-routes, testing)
