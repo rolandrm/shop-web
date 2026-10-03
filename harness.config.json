@@ -1,0 +1,26 @@
+{
+  "project": {
+    "name": "shop-web",
+    "description": "",
+    "stacks": [
+      {
+        "id": "web",
+        "root": ".",
+        "commands": {
+          "build": "pnpm build",
+          "lint": "pnpm lint"
+        }
+      }
+    ]
+  },
+  "global": {},
+  "paths": {
+    "docs": [
+      "docs/"
+    ],
+    "generated": [],
+    "protected": [
+      "docs/decisions/"
+    ]
+  }
+}
