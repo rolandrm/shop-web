@@ -8,7 +8,9 @@
         "root": ".",
         "commands": {
           "build": "pnpm build",
-          "lint": "pnpm lint"
+          "lint": "pnpm lint",
+          "typecheck": "pnpm typecheck",
+          "lint:architecture": "pnpm lint:architecture"
         }
       }
     ]
