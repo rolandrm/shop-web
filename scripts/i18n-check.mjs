@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Template — verrou 4 du harness Next.js : toutes les locales ont exactement les mêmes clés.
-// À copier dans scripts/i18n-check.mjs ; package.json :
-//   "i18n:check": "node scripts/i18n-check.mjs"
+// Installé par `harness init` (scripts/i18n-check.mjs), qui le
+// déclare dans le script "lint:architecture" de package.json.
 // Catalogues vérifiés : messages/ (common, errors) et src/features/*/messages/.
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";

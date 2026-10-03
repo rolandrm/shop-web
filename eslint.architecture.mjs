@@ -1,7 +1,8 @@
 // Template ESLint (flat config) — règles d'architecture du harness Next.js (verrou 3)
-// À copier dans  puis à étaler dans eslint.config.mjs, APRÈS les
-// configurations Next.js (core-web-vitals), React Hooks et jsx-a11y (qui
-// enregistrent le plugin `react`) :
+// Installé par `harness init` (eslint.architecture.mjs), qui
+// l'étale aussi dans eslint.config.mjs, APRÈS les configurations Next.js
+// (core-web-vitals), React Hooks et jsx-a11y (qui enregistrent le plugin
+// `react`) :
 //   import architecture from "./eslint.architecture.mjs";
 //   export default [...autresConfigs, ...architecture];
 //
@@ -46,7 +47,7 @@ const A11Y_LITERALS = {
   message: "Texte d'interface via next-intl, y compris aria-label, alt, title, placeholder.",
 };
 
-export default [
+const architecture = [
   {
     files: ["src/**/*.{ts,tsx}"],
     rules: {
@@ -71,3 +72,5 @@ export default [
     rules: { "no-restricted-imports": ["error", { paths: OFF_STACK }] },
   },
 ];
+
+export default architecture;

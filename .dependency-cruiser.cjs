@@ -1,5 +1,5 @@
 // Template dependency-cruiser — harness Next.js (verrou 1)
-// À copier à la racine de l'app web (.dependency-cruiser.cjs).
+// Installé par `harness init` (.dependency-cruiser.cjs).
 // Les chemins sont relatifs à cette racine. Lancer : pnpm depcruise src
 // Vérifier la syntaxe du group matching ($1) selon la version installée.
 
