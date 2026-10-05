@@ -37,9 +37,12 @@ Backend : ces schémas entrent dans le contrat OpenAPI commité `docs/api/openap
 
 ## Plan de test
 
-| Id | Niveau | Scénario | Attendu |
-|----|--------|----------|---------|
-| T1 | {unit / intégration / e2e / structure} | {scénario} | {résultat observable} |
+| Id | Niveau | Scénario | Attendu | Couvre |
+|----|--------|----------|---------|--------|
+| T1 | {unit / intégration / e2e / structure} | {scénario} | {résultat observable} | {US-001} |
+
+Chaque user story est couverte par au moins un test (colonne « Couvre ») :
+`harness gate spec` refuse sinon une spec en rédaction.
 
 Un contrôle de structure s'appuie sur un invariant du harness quand il en
 existe un (`harness gate arch --rule <id>`), pas sur une recherche de texte.
