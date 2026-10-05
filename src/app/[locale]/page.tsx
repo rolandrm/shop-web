@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CatalogLink } from "@/features/catalog";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -11,6 +12,7 @@ export default async function HomePage({ params }: Props) {
     <main className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
       <h1 className="text-3xl font-semibold">{t("homeTitle")}</h1>
       <p>{t("homeIntro")}</p>
+      <CatalogLink />
     </main>
   );
 }

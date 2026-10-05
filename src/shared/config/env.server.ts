@@ -22,4 +22,9 @@ export function parseServerEnv(
   return result.data;
 }
 
-export const serverEnv: ServerEnv = parseServerEnv(process.env);
+let cachedEnv: ServerEnv | undefined;
+
+export function getServerEnv(): ServerEnv {
+  cachedEnv ??= parseServerEnv(process.env);
+  return cachedEnv;
+}

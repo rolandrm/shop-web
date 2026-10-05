@@ -2,7 +2,7 @@ import "server-only";
 
 import type { z } from "zod";
 
-import { serverEnv } from "@/shared/config/env.server";
+import { getServerEnv } from "@/shared/config/env.server";
 import { err, ok, type Result } from "@/shared/lib/result";
 
 export const BACKEND_TIMEOUT_MS = 5000;
@@ -59,7 +59,7 @@ export async function backendRequest<T>(
   if (body !== undefined) headers["Content-Type"] = "application/json";
 
   try {
-    const response = await fetch(new URL(path, serverEnv.BACKEND_API_URL), {
+    const response = await fetch(new URL(path, getServerEnv().BACKEND_API_URL), {
       method,
       headers,
       body: body === undefined ? undefined : JSON.stringify(body),

@@ -8,6 +8,8 @@
   "errors": {
     "generic": "Une erreur est survenue. Veuillez réessayer.",
     "retry": "Réessayer",
-    "notFound": "Cette page est introuvable."
+    "notFound": "Cette page est introuvable.",
+    "BACKEND_TIMEOUT": "Le catalogue met trop de temps à répondre. Veuillez réessayer.",
+    "BACKEND_UNAVAILABLE": "Le catalogue est momentanément indisponible. Veuillez réessayer plus tard."
   }
 }
