@@ -8,6 +8,8 @@
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "retry": "Try again",
-    "notFound": "This page could not be found."
+    "notFound": "This page could not be found.",
+    "BACKEND_TIMEOUT": "The catalog is taking too long to respond. Please try again.",
+    "BACKEND_UNAVAILABLE": "The catalog is temporarily unavailable. Please try again later."
   }
 }
