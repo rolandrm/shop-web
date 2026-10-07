@@ -12,6 +12,7 @@ paths:
 - `api/backend-client.ts` (`server-only`) : seul `fetch` vers le backend ; `cache: "no-store"`, timeout, `Accept-Language`, `X-Request-Id`, `Idempotency-Key` ; erreur au format commun, réponse invalide → `502 INVALID_BACKEND_RESPONSE`
 - `api/bff-route.ts` et client `bffGet` (navigateur) ; réponses BFF sans le champ `message`
 - `auth/` (`server-only`) : `getSession()`, `requireSession()` ; ne rafraîchit jamais depuis un Server Component
-- `config/` : `env.server.ts` (`server-only`) et `env.client.ts` (`NEXT_PUBLIC_*` uniquement) validés par Zod
+- `config/` : `env.server.ts` (`server-only`) et `env.client.ts` (`NEXT_PUBLIC_*` uniquement) validés par Zod ; la configuration serveur se lit à la demande (`getServerEnv()`, mémorisée), JAMAIS au chargement du module : Next.js charge les pages pendant le build, qui dépendrait sinon des variables d'exécution
+- `i18n/` : `routing.ts`, `navigation.ts`, fabrique `createRequestConfig(loadFeatureMessages)` sans import de feature
 - `providers/` : `QueryClient` créé une fois par requête serveur / par session client, jamais au niveau module
 - `observability/` : `pino` (JSON, `requestId`, `traceId`), rapport d'erreurs ; jamais de données personnelles
