@@ -1,6 +1,6 @@
 # ADR 0001 : Contrat du backend copié et versionné dans le front
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-03
 - **Décideurs** : rolandrm
 - **Liée à** : `CLAUDE.md` (section « Backend consommé »), `docs/specs/web-foundation.md`, `docs/specs/catalog-products-list.md`
