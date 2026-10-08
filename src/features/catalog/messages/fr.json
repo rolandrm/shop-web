@@ -5,5 +5,8 @@
   "allCurrencies": "Toutes les devises",
   "nextPage": "Page suivante",
   "firstPage": "Première page",
-  "viewCatalog": "Voir le catalogue"
+  "viewCatalog": "Voir le catalogue",
+  "productTitle": "Produit",
+  "backToCatalog": "Retour au catalogue",
+  "productNotFound": "Ce produit est introuvable."
 }

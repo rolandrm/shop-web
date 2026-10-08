@@ -5,5 +5,8 @@
   "allCurrencies": "All currencies",
   "nextPage": "Next page",
   "firstPage": "First page",
-  "viewCatalog": "View the catalog"
+  "viewCatalog": "View the catalog",
+  "productTitle": "Product",
+  "backToCatalog": "Back to the catalog",
+  "productNotFound": "This product could not be found."
 }

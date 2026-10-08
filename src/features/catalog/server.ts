@@ -1,4 +1,4 @@
 import "server-only";
 
-export { productsSearchParamsSchema } from "./schemas/products";
-export { getProductListPage } from "./server/queries";
+export { productIdSchema, productsSearchParamsSchema } from "./schemas/products";
+export { getProductDetail, getProductListPage } from "./server/queries";

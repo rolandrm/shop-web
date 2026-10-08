@@ -73,6 +73,61 @@ export function invalidProductsHandler(log?: RequestLog) {
   });
 }
 
+const PRODUCT_URL = "*/v1/products/:id";
+
+const DEFAULT_PRODUCT: MockProduct = {
+  id: "00000000-0000-4000-8000-000000000001",
+  name: "Mug",
+  price: { amount: "1234.50", currency: "EUR" },
+};
+
+export function productHandler(
+  product: MockProduct = DEFAULT_PRODUCT,
+  log?: RequestLog,
+) {
+  return http.get(PRODUCT_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    return HttpResponse.json(product);
+  });
+}
+
+export function productErrorHandler(
+  status: number,
+  code: string,
+  log?: RequestLog,
+) {
+  return http.get(PRODUCT_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    return HttpResponse.json(
+      {
+        statusCode: status,
+        code,
+        message: "texte du backend",
+        details: [{ path: "id", message: "texte du backend" }],
+      },
+      { status },
+    );
+  });
+}
+
+export function invalidProductHandler(log?: RequestLog) {
+  return http.get(PRODUCT_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    return HttpResponse.json({
+      ...DEFAULT_PRODUCT,
+      price: { amount: "12.5", currency: "EUR" },
+    });
+  });
+}
+
+export function slowProductHandler(delayMs: number, log?: RequestLog) {
+  return http.get(PRODUCT_URL, async ({ request }) => {
+    log?.requests.push(request.clone());
+    await delay(delayMs);
+    return HttpResponse.json(DEFAULT_PRODUCT);
+  });
+}
+
 export function slowProductsHandler(delayMs: number, log?: RequestLog) {
   return http.get(PRODUCTS_URL, async ({ request }) => {
     log?.requests.push(request.clone());
