@@ -71,6 +71,7 @@ Toutes sont lancées par `harness verify`.
 | Invariants d'architecture | `docs/architecture-invariants.json` |
 | Règles par langage        | `.claude/rules/`                    |
 | Contrat d'API (backend)   | `docs/api/openapi.json`             |
+| Contrats consommés (front) | `docs/api/backends/` (`harness tool contract-pull`) |
 
 ## Règles non négociables
 
