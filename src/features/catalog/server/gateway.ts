@@ -5,7 +5,9 @@ import type { Result } from "@/shared/lib/result";
 
 import type { Currency } from "../model/products";
 import {
+  productDetailResponseSchema,
   productListResponseSchema,
+  type ProductDetailResponse,
   type ProductListResponse,
 } from "../schemas/products";
 
@@ -27,5 +29,21 @@ export function listProducts({
   return backendRequest(`/v1/products?${params.toString()}`, {
     schema: productListResponseSchema,
     locale,
+  });
+}
+
+export function getProduct({
+  id,
+  locale,
+  timeoutMs,
+}: {
+  id: string;
+  locale: string;
+  timeoutMs?: number;
+}): Promise<Result<ProductDetailResponse, BackendError>> {
+  return backendRequest(`/v1/products/${encodeURIComponent(id)}`, {
+    schema: productDetailResponseSchema,
+    locale,
+    timeoutMs,
   });
 }
