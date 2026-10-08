@@ -1,6 +1,6 @@
 # ADR 0002 : Configuration serveur validée au démarrage, pas au build
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-05
 - **Décideurs** : rolandrm
 - **Liée à** : `docs/specs/web-foundation.md` (US-003), `docs/exec-plans/completed/catalog-products-list.md` (révision 1, étape 5), `src/shared/config/env.server.ts`, `src/instrumentation.ts`

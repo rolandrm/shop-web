@@ -1,6 +1,6 @@
 # ADR 0004 : Catalogue rendu côté serveur, sans JavaScript client
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-05
 - **Décideurs** : rolandrm
 - **Liée à** : `docs/specs/catalog-products-list.md` (Contraintes non fonctionnelles), `docs/specs/catalog-product-detail.md`, `src/features/catalog/components/`

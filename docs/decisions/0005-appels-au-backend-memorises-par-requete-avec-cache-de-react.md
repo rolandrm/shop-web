@@ -1,6 +1,6 @@
 # ADR 0005 : Appels au backend mémorisés par requête avec `cache()` de React
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-08
 - **Décideurs** : rolandrm
 - **Liée à** : `docs/specs/catalog-product-detail.md` (titre de l'onglet), `docs/exec-plans/completed/catalog-product-detail.md` (question 2), `src/features/catalog/server/queries.ts`

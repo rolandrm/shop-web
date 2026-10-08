@@ -1,6 +1,6 @@
 # ADR 0003 : Traductions des features assemblées dans `app/`
 
-- **Statut** : Proposée
+- **Statut** : Acceptée
 - **Date** : 2026-10-05
 - **Décideurs** : rolandrm
 - **Liée à** : `docs/specs/catalog-products-list.md` (révision 1, question 1), `src/shared/i18n/`, `src/app/_i18n/request.ts`
