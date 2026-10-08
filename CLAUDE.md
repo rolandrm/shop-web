@@ -38,7 +38,8 @@ machine. Deux choses distinctes :
 
 - **Le contrat** (ce que l'API accepte et renvoie) : copie versionnée dans
   ce repo, `docs/api/backends/shop-api.openapi.json`, avec sa provenance
-  (repo, tag ou commit) dans `docs/api/backends/README.md`. C'est la
+  (repo, version, commit) dans `docs/api/backends/shop-api.source.json`,
+  mise à jour par `harness tool contract-pull` (ADR 0001). C'est la
   référence pour écrire les schémas Zod (à la main, champs utilisés
   seulement) et pour le backend simulé (MSW en tests, Prism en E2E). Elle
   ne se met à jour que par un geste humain, relu en PR, quand shop-api

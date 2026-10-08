@@ -1,0 +1,8 @@
+{
+  "backend": "shop-api",
+  "repo": "git@github.com:rolandrm/shop-api.git",
+  "contract": "docs/api/openapi.json",
+  "version": "v1.0.0",
+  "commit": "0f764898bf6514f2de1cbf30001bc13e2b666fcf",
+  "pulled_at": "2026-10-08T09:56:24.397Z"
+}
