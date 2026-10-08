@@ -21,5 +21,11 @@
     "docs": ["docs/"],
     "generated": [],
     "protected": ["docs/decisions/"]
+  },
+  "backends": {
+    "shop-api": {
+      "repo": "git@github.com:rolandrm/shop-api.git",
+      "contract": "docs/api/openapi.json"
+    }
   }
 }
