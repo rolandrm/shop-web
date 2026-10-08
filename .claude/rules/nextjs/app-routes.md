@@ -16,3 +16,5 @@ paths:
 - Pages authentifiées dynamiques ; garde de session dans le layout `(app)`
 - `app/api/bff/**` : `bffRoute(...)` (session + `Result` → HTTP) ; lectures en `GET` ; routes qui modifient réservées aux webhooks signés
 - `app/api/health` ne dépend pas du backend
+- `error.tsx` et `global-error.tsx` sont TOUJOURS `"use client"` (imposé par Next.js) ; composant feuille, texte traduit, aucun accès serveur
+- `app/_i18n/request.ts` : point d'entrée de next-intl, assemble les messages des features (seule couche qui les connaît toutes)
