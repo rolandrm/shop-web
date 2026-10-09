@@ -26,5 +26,8 @@
     "shop-api": {
       "contracts": "git@github.com:rolandrm/api-contracts.git"
     }
+  },
+  "publish": {
+    "image": "ghcr.io/rolandrm/shop-web"
   }
 }

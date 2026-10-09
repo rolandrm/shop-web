@@ -19,7 +19,8 @@
     "backend_root": "<backend-root>",
     "springboot_root": "<springboot-root>",
     "base_package": "<base-package>",
-    "web_root": "."
+    "web_root": ".",
+    "platform_root": "."
   },
   "rules": [],
   "disabled_rules": []
