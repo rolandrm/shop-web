@@ -1,8 +1,9 @@
 {
   "backend": "shop-api",
-  "repo": "git@github.com:rolandrm/shop-api.git",
-  "contract": "docs/api/openapi.json",
-  "version": "v1.0.0",
-  "commit": "0f764898bf6514f2de1cbf30001bc13e2b666fcf",
-  "pulled_at": "2026-10-08T09:56:24.397Z"
+  "contracts": "git@github.com:rolandrm/api-contracts.git",
+  "repo": "https://github.com/rolandrm/shop-api",
+  "version": "v1.2.1",
+  "commit": "5fb52c8d7e5bd0bb174e949174656e9deeedaf65",
+  "published_at": "2026-10-12T16:43:57.988Z",
+  "pulled_at": "2026-10-12T17:53:24.351Z"
 }
