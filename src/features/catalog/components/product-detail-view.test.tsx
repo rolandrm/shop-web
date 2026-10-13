@@ -7,6 +7,7 @@ import rootFr from "../../../../messages/fr.json";
 import catalogEn from "../messages/en.json";
 import catalogFr from "../messages/fr.json";
 import type { ProductDetail } from "../model/products";
+import { toProductDetail } from "../server/mappers";
 import { ProductDetailView } from "./product-detail-view";
 
 afterEach(cleanup);
@@ -49,5 +50,70 @@ describe("ProductDetailView", () => {
     expect(normalize(container.textContent)).toContain(
       normalize(formatMoney("1234.50", "EUR", "fr")),
     );
+  });
+
+  it("stock T11: shows the stock state in fr then en", () => {
+    render(
+      <NextIntlClientProvider
+        locale="fr"
+        messages={{ ...rootFr, catalog: catalogFr }}
+      >
+        <ProductDetailView product={{ ...mug, inStock: true }} />
+      </NextIntlClientProvider>,
+    );
+    expect(screen.getByText("En stock")).toBeTruthy();
+    cleanup();
+    render(
+      <NextIntlClientProvider
+        locale="en"
+        messages={{ ...rootEn, catalog: catalogEn }}
+      >
+        <ProductDetailView product={{ ...mug, inStock: false }} />
+      </NextIntlClientProvider>,
+    );
+    expect(screen.getByText("Out of stock")).toBeTruthy();
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
+      "Mug",
+    );
+    expect(normalize(document.body.textContent)).toContain("€1,234.50");
+  });
+
+  it("stock T12: never shows the quantity", () => {
+    const product = toProductDetail({
+      id: "00000000-0000-4000-8000-000000000001",
+      name: "Mug",
+      price: { amount: "1234.50", currency: "EUR" },
+      stock: 42,
+    });
+    const { container } = render(
+      <NextIntlClientProvider
+        locale="fr"
+        messages={{ ...rootFr, catalog: catalogFr }}
+      >
+        <ProductDetailView product={product} />
+      </NextIntlClientProvider>,
+    );
+    expect(container.textContent).toContain("En stock");
+    expect(container.textContent).not.toContain("42");
+  });
+
+  it("stock T19: shows no stock state without inStock", () => {
+    render(
+      <NextIntlClientProvider
+        locale="fr"
+        messages={{ ...rootFr, catalog: catalogFr }}
+      >
+        <ProductDetailView product={mug} />
+      </NextIntlClientProvider>,
+    );
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(normalize(document.body.textContent)).toContain("Mug");
+    expect(normalize(document.body.textContent)).toContain(
+      normalize(formatMoney("1234.50", "EUR", "fr")),
+    );
+    expect(screen.queryByText("En stock")).toBeNull();
+    expect(screen.queryByText("Rupture de stock")).toBeNull();
+    expect(screen.queryByRole("alert")).toBeNull();
   });
 });

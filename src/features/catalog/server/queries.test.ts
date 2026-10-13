@@ -5,8 +5,11 @@ import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 import {
   createRequestLog,
   invalidProductsHandler,
+  makeProducts,
   productsErrorHandler,
   productsHandler,
+  productsWithoutStockHandler,
+  rawStockProductsHandler,
 } from "../__mocks__/handlers";
 import { getProductListPage } from "./queries";
 
@@ -67,6 +70,48 @@ describe("getProductListPage", () => {
       ok: false,
       error: { code: "INVALID_BACKEND_RESPONSE", status: 502 },
     });
+  });
+
+  it("stock T6: inStock vaut true puis false", async () => {
+    server.use(
+      productsHandler({
+        items: makeProducts(2, [
+          { name: "Mug", stock: 12 },
+          { name: "Tasse", stock: 0 },
+        ]),
+        nextCursor: null,
+      }),
+    );
+    const result = await getProductListPage({ locale: "fr" });
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value.items.map((i) => [i.name, i.inStock])).toEqual([
+        ["Mug", true],
+        ["Tasse", false],
+      ]);
+    }
+  });
+
+  it("stock T7: stock -1 renvoie INVALID_BACKEND_RESPONSE sans lever", async () => {
+    server.use(rawStockProductsHandler(-1));
+    expect(await getProductListPage({ locale: "fr" })).toEqual({
+      ok: false,
+      error: { code: "INVALID_BACKEND_RESPONSE", status: 502 },
+    });
+  });
+
+  it("stock T17: produits sans stock, inStock undefined", async () => {
+    server.use(productsWithoutStockHandler(2));
+    const result = await getProductListPage({ locale: "fr" });
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value.items).toHaveLength(2);
+      for (const item of result.value.items) {
+        expect(item.name).toBeTruthy();
+        expect(item.amount).toMatch(/^\d+\.\d{2}$/);
+        expect(item.inStock).toBeUndefined();
+      }
+    }
   });
 
   it("une requête sans handler n'aboutit pas à un succès (onUnhandledFrame actif)", async () => {

@@ -19,6 +19,30 @@ describe("toProductDetail", () => {
   });
 });
 
+describe("inStock dans les mappers", () => {
+  const base = {
+    id: "00000000-0000-4000-8000-000000000001",
+    name: "Mug",
+    price: { amount: "12.50", currency: "EUR" as const },
+  };
+
+  it.each([
+    [12, true],
+    [0, false],
+    [undefined, undefined],
+  ])("stock T4: stock %j donne inStock %j sans clé stock", (stock, expected) => {
+    const detail = toProductDetail({ ...base, stock });
+    const page = toProductListPage({
+      items: [{ ...base, stock }],
+      nextCursor: null,
+    });
+    expect(detail.inStock).toBe(expected);
+    expect(page.items[0].inStock).toBe(expected);
+    expect("stock" in detail).toBe(false);
+    expect("stock" in page.items[0]).toBe(false);
+  });
+});
+
 describe("toProductListPage", () => {
   it("T4: mappe 2 produits et le nextCursor", () => {
     const page = toProductListPage({

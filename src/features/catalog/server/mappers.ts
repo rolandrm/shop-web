@@ -1,10 +1,18 @@
 import "server-only";
 
-import type { ProductDetail, ProductListPage } from "../model/products";
+import {
+  isInStock,
+  type ProductDetail,
+  type ProductListPage,
+} from "../model/products";
 import type {
   ProductDetailResponse,
   ProductListResponse,
 } from "../schemas/products";
+
+function inStockOf(stock: number | undefined): boolean | undefined {
+  return stock === undefined ? undefined : isInStock(stock);
+}
 
 export function toProductDetail(response: ProductDetailResponse): ProductDetail {
   return {
@@ -12,6 +20,7 @@ export function toProductDetail(response: ProductDetailResponse): ProductDetail 
     name: response.name,
     amount: response.price.amount,
     currency: response.price.currency,
+    inStock: inStockOf(response.stock),
   };
 }
 
@@ -22,6 +31,7 @@ export function toProductListPage(response: ProductListResponse): ProductListPag
       name: item.name,
       amount: item.price.amount,
       currency: item.price.currency,
+      inStock: inStockOf(item.stock),
     })),
     nextCursor: response.nextCursor,
   };

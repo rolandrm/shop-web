@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
 
-import { productDetailTitle, productsSearchParams } from "./products";
+import {
+  isInStock,
+  productDetailTitle,
+  productsSearchParams,
+} from "./products";
+
+describe("isInStock", () => {
+  it("stock T3: 0 est en rupture, 1 et le maximum sont en stock", () => {
+    expect(isInStock(0)).toBe(false);
+    expect(isInStock(1)).toBe(true);
+    expect(isInStock(2147483647)).toBe(true);
+  });
+});
 
 describe("productDetailTitle", () => {
   it("T19: nom du produit, sinon repli", () => {

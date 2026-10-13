@@ -6,6 +6,7 @@ type MockProduct = {
   id: string;
   name: string;
   price: { amount: string; currency: "EUR" | "USD" | "GBP" };
+  stock?: number;
 };
 
 /** Requêtes reçues par un handler, pour les inspecter dans les tests. */
@@ -15,11 +16,20 @@ export function createRequestLog(): RequestLog {
   return { requests: [] };
 }
 
-export function makeProducts(count: number): MockProduct[] {
+/**
+ * Produits générés, `stock: 5` par défaut. `overrides[i]` surcharge le produit
+ * `i` (dont `name` et `stock`).
+ */
+export function makeProducts(
+  count: number,
+  overrides: Partial<MockProduct>[] = [],
+): MockProduct[] {
   return Array.from({ length: count }, (_, index) => ({
     id: `00000000-0000-4000-8000-${String(index).padStart(12, "0")}`,
     name: `Produit ${index + 1}`,
     price: { amount: `${index + 1}.00`, currency: "EUR" },
+    stock: 5,
+    ...overrides[index],
   }));
 }
 
@@ -27,12 +37,44 @@ export function productsHandler(
   {
     count = 20,
     nextCursor = "abc",
-  }: { count?: number; nextCursor?: string | null } = {},
+    items,
+  }: {
+    count?: number;
+    nextCursor?: string | null;
+    items?: MockProduct[];
+  } = {},
   log?: RequestLog,
 ) {
   return http.get(PRODUCTS_URL, ({ request }) => {
     log?.requests.push(request.clone());
-    return HttpResponse.json({ items: makeProducts(count), nextCursor });
+    return HttpResponse.json({
+      items: items ?? makeProducts(count),
+      nextCursor,
+    });
+  });
+}
+
+/** Liste d'un shop-api antérieur à 1.2.0 : aucun produit n'a de `stock`. */
+export function productsWithoutStockHandler(count = 2, log?: RequestLog) {
+  return http.get(PRODUCTS_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    const items = makeProducts(count).map((product) => ({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+    }));
+    return HttpResponse.json({ items, nextCursor: null });
+  });
+}
+
+/** Liste dont le premier produit porte une valeur de `stock` arbitraire. */
+export function rawStockProductsHandler(stock: unknown, log?: RequestLog) {
+  return http.get(PRODUCTS_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    return HttpResponse.json({
+      items: [{ ...makeProducts(1)[0], stock }],
+      nextCursor: null,
+    });
   });
 }
 
@@ -88,6 +130,14 @@ export function productHandler(
   return http.get(PRODUCT_URL, ({ request }) => {
     log?.requests.push(request.clone());
     return HttpResponse.json(product);
+  });
+}
+
+/** Fiche dont `stock` est une valeur arbitraire (`-1`, `null`, …). */
+export function rawStockProductHandler(stock: unknown, log?: RequestLog) {
+  return http.get(PRODUCT_URL, ({ request }) => {
+    log?.requests.push(request.clone());
+    return HttpResponse.json({ ...DEFAULT_PRODUCT, stock });
   });
 }
 
