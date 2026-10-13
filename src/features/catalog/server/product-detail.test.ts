@@ -7,11 +7,17 @@ import {
   invalidProductHandler,
   productErrorHandler,
   productHandler,
+  rawStockProductHandler,
   slowProductHandler,
 } from "../__mocks__/handlers";
 import { getProductDetail } from "./queries";
 
 const ID = "00000000-0000-4000-8000-000000000001";
+const PRODUCT = {
+  id: ID,
+  name: "Mug",
+  price: { amount: "1234.50", currency: "EUR" as const },
+};
 
 const server = setupServer();
 
@@ -69,6 +75,39 @@ describe("getProductDetail", () => {
       ok: false,
       error: { code: "BACKEND_TIMEOUT", status: 504 },
     });
+  });
+
+  it("stock T5: inStock true pour stock 1, false pour stock 0", async () => {
+    server.use(productHandler({ ...PRODUCT, stock: 1 }));
+    expect(await getProductDetail({ id: ID, locale: "fr" })).toMatchObject({
+      ok: true,
+      value: { inStock: true },
+    });
+
+    server.use(productHandler({ ...PRODUCT, stock: 0 }));
+    expect(await getProductDetail({ id: ID, locale: "fr" })).toMatchObject({
+      ok: true,
+      value: { inStock: false },
+    });
+  });
+
+  it("stock T7: stock null renvoie INVALID_BACKEND_RESPONSE sans lever", async () => {
+    server.use(rawStockProductHandler(null));
+    expect(await getProductDetail({ id: ID, locale: "fr" })).toEqual({
+      ok: false,
+      error: { code: "INVALID_BACKEND_RESPONSE", status: 502 },
+    });
+  });
+
+  it("stock T17: fiche sans stock, inStock undefined", async () => {
+    server.use(productHandler());
+    const result = await getProductDetail({ id: ID, locale: "fr" });
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value.name).toBe("Mug");
+      expect(result.value.amount).toBe("1234.50");
+      expect(result.value.inStock).toBeUndefined();
+    }
   });
 
   it("une requête sans handler n'aboutit pas à un succès (onUnhandledFrame actif)", async () => {

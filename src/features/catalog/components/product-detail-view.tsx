@@ -2,6 +2,7 @@ import { useLocale } from "next-intl";
 import { formatMoney } from "@/shared/lib/money";
 import type { ProductDetail } from "../model/products";
 import { BackToCatalogLink } from "./back-to-catalog-link";
+import { StockStatus } from "./stock-status";
 
 export function ProductDetailView({ product }: { product: ProductDetail }) {
   const locale = useLocale();
@@ -9,6 +10,7 @@ export function ProductDetailView({ product }: { product: ProductDetail }) {
     <div className="flex flex-col items-start gap-4">
       <h1>{product.name}</h1>
       <p>{formatMoney(product.amount, product.currency, locale)}</p>
+      <StockStatus inStock={product.inStock} />
       <BackToCatalogLink />
     </div>
   );

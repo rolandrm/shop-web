@@ -50,6 +50,34 @@ describe("productDetailResponseSchema", () => {
   });
 });
 
+describe("stock dans les schémas", () => {
+  const product = {
+    id: "00000000-0000-4000-8000-000000000001",
+    name: "Mug",
+    price: { amount: "1234.50", currency: "EUR" },
+  };
+  const parseBoth = (item: unknown) => [
+    productDetailResponseSchema.safeParse(item).success,
+    productListResponseSchema.safeParse({ items: [item], nextCursor: null })
+      .success,
+  ];
+
+  it.each([[0], [12], [2147483647]])("stock T1: accepte stock %j", (stock) => {
+    expect(parseBoth({ ...product, stock })).toEqual([true, true]);
+  });
+
+  it("stock T1: accepte un produit sans stock", () => {
+    expect(parseBoth(product)).toEqual([true, true]);
+  });
+
+  it.each([[-1], [2.5], [null], ["3"], [2147483648]])(
+    "stock T2: refuse stock %j",
+    (stock) => {
+      expect(parseBoth({ ...product, stock })).toEqual([false, false]);
+    },
+  );
+});
+
 describe("productsSearchParamsSchema", () => {
   it("T1: conserve les paramètres valides", () => {
     expect(

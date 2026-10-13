@@ -8,5 +8,7 @@
   "viewCatalog": "Voir le catalogue",
   "productTitle": "Produit",
   "backToCatalog": "Retour au catalogue",
-  "productNotFound": "Ce produit est introuvable."
+  "productNotFound": "Ce produit est introuvable.",
+  "inStock": "En stock",
+  "outOfStock": "Rupture de stock"
 }

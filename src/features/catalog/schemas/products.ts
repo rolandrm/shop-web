@@ -11,6 +11,7 @@ const productSchema = z.object({
     amount: z.string().regex(/^\d+\.\d{2}$/),
     currency: currencySchema,
   }),
+  stock: z.number().int().min(0).max(2147483647).optional(),
 });
 
 /** Réponse de `GET /v1/products`, limitée aux champs utilisés. */

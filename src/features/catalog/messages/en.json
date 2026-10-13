@@ -8,5 +8,7 @@
   "viewCatalog": "View the catalog",
   "productTitle": "Product",
   "backToCatalog": "Back to the catalog",
-  "productNotFound": "This product could not be found."
+  "productNotFound": "This product could not be found.",
+  "inStock": "In stock",
+  "outOfStock": "Out of stock"
 }

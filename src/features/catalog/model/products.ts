@@ -7,6 +7,7 @@ export type ProductListItem = {
   name: string;
   amount: string;
   currency: Currency;
+  inStock?: boolean;
 };
 
 export type ProductListPage = {
@@ -19,7 +20,13 @@ export type ProductDetail = {
   name: string;
   amount: string;
   currency: Currency;
+  inStock?: boolean;
 };
+
+/** Disponibilité : en stock dès qu'il reste au moins une unité. */
+export function isInStock(stock: number): boolean {
+  return stock > 0;
+}
 
 /** Titre du document : le nom du produit affiché, sinon le repli. */
 export function productDetailTitle(
