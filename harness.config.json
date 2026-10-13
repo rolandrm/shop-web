@@ -24,7 +24,8 @@
   },
   "backends": {
     "shop-api": {
-      "contracts": "git@github.com:rolandrm/api-contracts.git"
+      "contracts": "git@github.com:rolandrm/api-contracts.git",
+      "env": "BACKEND_API_URL"
     }
   },
   "publish": {
