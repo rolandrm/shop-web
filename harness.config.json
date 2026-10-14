@@ -30,5 +30,8 @@
   },
   "publish": {
     "image": "ghcr.io/rolandrm/shop-web"
+  },
+  "environments": {
+    "dev": { "backends": { "shop-api": "https://api.shop-dev.179-61-219-82.sslip.io" } }
   }
 }
